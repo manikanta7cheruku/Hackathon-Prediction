@@ -29,3 +29,26 @@ If you clone this repository, you must install the dependencies to run the app.
 ```bash
 git clone git clone https://github.com/manikanta7cheruku/Hackathon-Prediction.git
 cd Hackathon-Prediction
+
+
+Create a Virtual Environment (Recommended)
+This keeps your computer clean.
+
+For Windows:
+Bash -
+- py -3.11 -m venv venv
+- venv\Scripts\activate
+
+For Mac/Linux:
+Bash - 
+- python3 -m venv venv
+- source venv/bin/activate
+
+3. Install Dependencies
+This installs Streamlit, Pandas, XGBoost, and other required libraries.
+Bash
+- pip install -r requirements.txt
+4. Run the App
+Bash
+
+- streamlit run app.py
