@@ -27,5 +27,5 @@ If you clone this repository, you must install the dependencies to run the app.
 
 ### 1. Clone the Repo
 ```bash
-git clone https://github.com/YOUR_USERNAME/Hackathon-Success-Predictor-AI.git
-cd Hackathon-Success-Predictor-AI
+git clone git clone https://github.com/manikanta7cheruku/Hackathon-Prediction.git
+cd Hackathon-Prediction
