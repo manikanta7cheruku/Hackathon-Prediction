@@ -1,54 +1,79 @@
-# Hackathon Success Predictor AI
+Hackathon Success Predictor AI
 
-**A Predictive Analytics Dashboard to forecast Hackathon team performance using Multi-Factor Dynamics Analysis.**
+"Predicting hackathon outcomes by modeling the human dynamics behind high-performing teams."
 
-## 📌 Project Overview
-This project utilizes Machine Learning (**XGBoost**) to analyze behavioral telemetry data—such as **Commit Velocity**, **Communication Frequency**, and **Sleep Schedules**—to predict whether a team will win a Hackathon.
+Hackathon Success Predictor AI is a machine learning–powered analytics dashboard that forecasts team performance using behavioral telemetry rather than just technical skill. The system analyzes commit velocity, communication frequency, and sleep schedules to estimate a team’s probability of winning a hackathon.
 
-Unlike traditional models that look only at technical skills, this system evaluates the **"Human Dynamics"** that drive success, providing real-time strategic insights via a **Streamlit** web dashboard.
+Predictions and strategic insights are delivered in real time through an interactive Streamlit web application.
 
-##Key Features
-*   **Real-time Prediction Engine:** Instantly calculates Win Probability based on user inputs.
-*   **6-Tier Classification System:** Categorizes teams from "Critical Failure" to "Elite / Dominating".
-*   **Explainable AI (XAI):** Uses **SHAP (SHapley Additive exPlanations)** to visualize exactly *why* a prediction was made (e.g., "Score lowered due to Sleep Deprivation").
-*   **Strategic AI Assessment:** Provides dynamic, actionable feedback to improve team odds (e.g., "Increase Communication to >50 msgs/hr").
-*   **Bottleneck Detection:** Automatically identifies the primary constraint (Sleep vs. Velocity vs. Communication).
+Features
 
-## 🛠️ ech Stack
-*   **Frontend:** Streamlit (Python)
-*   **Machine Learning:** XGBoost Classifier, Scikit-Learn
-*   **Explainability:** SHAP
-*   **Data Processing:** Pandas, NumPy
-*   **Persistence:** Joblib
+Real-Time Prediction Engine
+Instantly calculates win probability based on user-provided metrics.
 
-## How to Run Locally (For Teammates)
+6-Tier Classification System
+Categorizes teams from Critical Failure to Elite / Dominating.
 
-If you clone this repository, you must install the dependencies to run the app.
+Explainable AI (XAI)
+Uses SHAP (SHapley Additive Explanations) to visualize why a prediction was made
+(e.g., score reduction due to sleep deprivation).
 
-### 1. Clone the Repo
-```bash
-git clone git clone https://github.com/manikanta7cheruku/Hackathon-Prediction.git
+Strategic AI Assessment
+Generates actionable feedback to improve team odds
+(e.g., increase communication to more than 50 messages per hour).
+
+Bottleneck Detection
+Automatically identifies the primary constraint impacting performance
+(Sleep vs. Velocity vs. Communication).
+
+Tech Stack
+
+Frontend: Streamlit (Python)
+
+Machine Learning: XGBoost Classifier, Scikit-Learn
+
+Explainability: SHAP
+
+Data Processing: Pandas, NumPy
+
+Persistence: Joblib
+
+Installation
+1. Clone the Repository
+git clone https://github.com/manikanta7cheruku/Hackathon-Prediction.git
 cd Hackathon-Prediction
 
+2. Create a Virtual Environment (Recommended)
 
-Create a Virtual Environment (Recommended)
-This keeps your computer clean.
+Windows
 
-For Windows:
-Bash -
-- py -3.11 -m venv venv
-- venv\Scripts\activate
+py -3.11 -m venv venv
+venv\Scripts\activate
 
-For Mac/Linux:
-Bash - 
-- python3 -m venv venv
-- source venv/bin/activate
+
+Mac / Linux
+
+python3 -m venv venv
+source venv/bin/activate
 
 3. Install Dependencies
-This installs Streamlit, Pandas, XGBoost, and other required libraries.
-Bash
-- pip install -r requirements.txt
-4. Run the App
-Bash
+pip install -r requirements.txt
 
-- streamlit run app.py
+4. Run the Application
+streamlit run app.py
+
+Usage
+
+Launch the Streamlit application.
+
+Input team metrics such as commit velocity, communication rate, and sleep hours.
+
+View predicted win probability, classification tier, and SHAP-based explanations.
+
+Apply strategic recommendations to improve predicted outcomes.
+
+Notes
+
+Designed for hackathon analytics and experimentation.
+
+Python 3.11 is recommended for best compatibility.

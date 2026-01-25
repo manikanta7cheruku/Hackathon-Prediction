@@ -12,14 +12,16 @@ st.set_page_config(page_title="Hackathon Analytics", layout="wide", initial_side
 # --- 2. FORCE SCROLL TO TOP ---
 components.html("""<script>window.parent.document.querySelector('section.main').scrollTo(0, 0);</script>""", height=0)
 
-# --- 3. CSS STYLING ---
+# --- 2. CSS STYLING ---
 st.markdown("""
 <style>
-    .section-header { font-size: 1.4rem !important; font-weight: 700 !important; border-bottom: 2px solid #3498db !important; padding-bottom: 10px; margin-top: 40px; margin-bottom: 20px; }
-    .footer-card { background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 25px; margin-top: 60px; margin-bottom: 20px; }
-    .footer-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 10px; color: #3498db; }
-    .footer-text { font-size: 0.95rem; opacity: 0.9; line-height: 1.6; }
-    code { color: #e83e8c; background-color: rgba(255, 255, 255, 0.1); padding: 2px 4px; border-radius: 4px; }
+    /* ... (Your existing CSS for Subheadings and Footer Card) ... */
+
+    /* ADD THIS HERE TO HIDE STREAMLIT BRANDING */
+    footer {visibility: hidden;}
+    #MainMenu {visibility: hidden;}
+    header {visibility: hidden;}
+    
 </style>
 """, unsafe_allow_html=True)
 
