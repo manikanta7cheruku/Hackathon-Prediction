@@ -1,79 +1,68 @@
-Hackathon Success Predictor AI
+# Hackathon Success Predictor AI
 
-"Predicting hackathon outcomes by modeling the human dynamics behind high-performing teams."
+**A Predictive Analytics Dashboard to forecast Hackathon team performance using Multi-Factor Dynamics Analysis.**
 
-Hackathon Success Predictor AI is a machine learning–powered analytics dashboard that forecasts team performance using behavioral telemetry rather than just technical skill. The system analyzes commit velocity, communication frequency, and sleep schedules to estimate a team’s probability of winning a hackathon.
+## Project Overview
 
-Predictions and strategic insights are delivered in real time through an interactive Streamlit web application.
+This project utilizes Machine Learning (**XGBoost**) to analyze behavioral telemetry data—such as **Commit Velocity**, **Communication Frequency**, and **Sleep Schedules**—to predict whether a team will win a Hackathon.
 
-Features
+Unlike traditional models that look only at technical skills, this system evaluates the **"Human Dynamics"** that drive success. The solution processes these inputs to provide real-time strategic insights via an interactive **Streamlit** web dashboard.
 
-Real-Time Prediction Engine
-Instantly calculates win probability based on user-provided metrics.
+## Key Capabilities
 
-6-Tier Classification System
-Categorizes teams from Critical Failure to Elite / Dominating.
+*   **Real-time Prediction Engine:** Instantly calculates Win Probability based on specific team behavioral metrics.
+*   **6-Tier Classification System:** Categorizes teams into distinct performance brackets, ranging from "Critical Failure" to "Elite / Dominating."
+*   **Explainable AI (XAI):** Integrated **SHAP (SHapley Additive exPlanations)** values to visualize exactly *why* a prediction was made (e.g., scoring impacted negatively by Sleep Deprivation).
+*   **Strategic AI Assessment:** Provides dynamic, actionable feedback to improve team odds (e.g., "Increase Communication to >50 msgs/hr").
+*   **Bottleneck Detection:** Automatically identifies the primary constraint limiting team performance (Sleep vs. Velocity vs. Communication).
 
-Explainable AI (XAI)
-Uses SHAP (SHapley Additive Explanations) to visualize why a prediction was made
-(e.g., score reduction due to sleep deprivation).
+## Technology Stack
 
-Strategic AI Assessment
-Generates actionable feedback to improve team odds
-(e.g., increase communication to more than 50 messages per hour).
+*   **Frontend Interface:** Streamlit
+*   **Machine Learning:** XGBoost Classifier, Scikit-Learn
+*   **Model Interpretability:** SHAP
+*   **Data Processing:** Pandas, NumPy
+*   **Model Persistence:** Joblib
 
-Bottleneck Detection
-Automatically identifies the primary constraint impacting performance
-(Sleep vs. Velocity vs. Communication).
+## Installation & Setup
 
-Tech Stack
+Follow these steps to set up the project locally.
 
-Frontend: Streamlit (Python)
-
-Machine Learning: XGBoost Classifier, Scikit-Learn
-
-Explainability: SHAP
-
-Data Processing: Pandas, NumPy
-
-Persistence: Joblib
-
-Installation
-1. Clone the Repository
+### 1. Clone the Repository
+```bash
 git clone https://github.com/manikanta7cheruku/Hackathon-Prediction.git
 cd Hackathon-Prediction
+2. Create a Virtual Environment
+It is recommended to run this project in a virtual environment to manage dependencies.
 
-2. Create a Virtual Environment (Recommended)
+For Windows:
 
-Windows
+Bash
 
 py -3.11 -m venv venv
-venv\Scripts\activate
+.\venv\Scripts\activate
+For Mac/Linux:
 
-
-Mac / Linux
+Bash
 
 python3 -m venv venv
 source venv/bin/activate
-
 3. Install Dependencies
+Install Streamlit, Pandas, XGBoost, and other required libraries.
+
+Bash
+
 pip install -r requirements.txt
-
 4. Run the Application
+Launch the dashboard on your local server.
+
+Bash
+
 streamlit run app.py
-
 Usage
-
-Launch the Streamlit application.
-
-Input team metrics such as commit velocity, communication rate, and sleep hours.
-
-View predicted win probability, classification tier, and SHAP-based explanations.
-
-Apply strategic recommendations to improve predicted outcomes.
-
-Notes
-
-Designed for hackathon analytics and experimentation.
-
-Python 3.11 is recommended for best compatibility.
+Once the app is running, open the local URL provided in the terminal (usually http://localhost:8501).
+Input the team parameters (Commit Velocity, Sleep Hours, Communication Frequency).
+Click Predict.
+Review the Win Probability, Team Classification, and AI-generated strategic advice.
+License
+Distributed under the MIT License.
