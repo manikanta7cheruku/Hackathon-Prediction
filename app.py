@@ -12,16 +12,18 @@ st.set_page_config(page_title="Hackathon Analytics", layout="wide", initial_side
 # --- 2. FORCE SCROLL TO TOP ---
 components.html("""<script>window.parent.document.querySelector('section.main').scrollTo(0, 0);</script>""", height=0)
 
-# --- 2. CSS STYLING ---
+# --- 3. CSS STYLING ---
 st.markdown("""
 <style>
-    /* ... (Your existing CSS for Subheadings and Footer Card) ... */
-
-    /* ADD THIS HERE TO HIDE STREAMLIT BRANDING */
+    .section-header { font-size: 1.4rem !important; font-weight: 700 !important; border-bottom: 2px solid #3498db !important; padding-bottom: 10px; margin-top: 40px; margin-bottom: 20px; }
+    .footer-card { background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 25px; margin-top: 60px; margin-bottom: 20px; }
+    .footer-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 10px; color: #3498db; }
+    .footer-text { font-size: 0.95rem; opacity: 0.9; line-height: 1.6; }
+    code { color: #e83e8c; background-color: rgba(255, 255, 255, 0.1); padding: 2px 4px; border-radius: 4px; }
+    
+    /* HIDE STREAMLIT FOOTER ONLY (Keeps Header visible so you can toggle sidebar) */
     footer {visibility: hidden;}
     #MainMenu {visibility: hidden;}
-    header {visibility: hidden;}
-    
 </style>
 """, unsafe_allow_html=True)
 
@@ -46,7 +48,7 @@ comm_freq = st.sidebar.slider("Communication Freq (Msgs/Hr)", 10, 100, 50)
 sleep = st.sidebar.slider("Sleep Schedule (Hours)", 2.0, 8.0, 6.0)
 wins = st.sidebar.slider("Prior Hackathon Wins", 0, 5, 1)
 st.sidebar.markdown("---")
-st.sidebar.caption("Analytics Dashboard v5.1")
+st.sidebar.caption("Analytics Dashboard v5.6")
 
 # --- 6. ENGINE ---
 input_df = pd.DataFrame({ 'Team_Experience_Avg': [experience], 'Tech_Stack_Diversity': [tech_stack], 'Commit_Velocity': [commit_vel], 'Communication_Freq': [comm_freq], 'Sleep_Hours': [sleep], 'Prior_Wins': [wins] })
@@ -56,18 +58,12 @@ prob = model.predict_proba(input_df_processed)[0][1]
 
 # --- 7. TIER LOGIC ---
 def get_tier_info(p):
-    if p < 0.20:
-        return "Critical Failure", "The model detects a near-zero probability of success. Major structural changes required."
-    elif p < 0.45:
-        return "At Risk", "Performance metrics are significantly below the winning threshold. Immediate intervention needed."
-    elif p < 0.60:
-        return "Average / Bubble", "Your team is on the borderline. You are performing adequately but lack a competitive edge."
-    elif p < 0.75:
-        return "Contender", "Strong performance detected. You are in the upper percentile but not yet dominant."
-    elif p < 0.90:
-        return "Top Tier", "Excellent dynamics. Your team exhibits the traits of a podium-finisher."
-    else:
-        return "Elite / Dominating", "Exceptional stats. The model predicts a definitive win based on current telemetry."
+    if p < 0.20: return "Critical Failure", "The model detects a near-zero probability of success. Major structural changes required."
+    elif p < 0.45: return "At Risk", "Performance metrics are significantly below the winning threshold. Immediate intervention needed."
+    elif p < 0.60: return "Average / Bubble", "Your team is on the borderline. You are performing adequately but lack a competitive edge."
+    elif p < 0.75: return "Contender", "Strong performance detected. You are in the upper percentile but not yet dominant."
+    elif p < 0.90: return "Top Tier", "Excellent dynamics. Your team exhibits the traits of a podium-finisher."
+    else: return "Elite / Dominating", "Exceptional stats. The model predicts a definitive win based on current telemetry."
 
 status_label, status_message = get_tier_info(prob)
 
@@ -77,8 +73,6 @@ st.markdown("### Predictive Modeling & Telemetry Analysis")
 
 # SECTION: KPIs
 st.markdown('<div class="section-header">Key Performance Indicators</div>', unsafe_allow_html=True)
-
-# [FIX]: Increased width of col2 and col3 to prevent text cutoff
 col1, col2, col3 = st.columns([1.3, 2.5, 3])
 
 with col1:
@@ -100,15 +94,27 @@ shap_values = explainer(input_df_processed)
 shap_vals = shap_values[0].values
 feature_names = ["Experience", "Stack Diversity", "Commit Velocity", "Communication", "Sleep", "Prior Wins"]
 
+# GRAPH SETUP
 fig, ax = plt.subplots(figsize=(12, 6))
+
+# Force Background to WHITE
+fig.patch.set_facecolor('#ffffff')
+ax.set_facecolor('#ffffff')
+
 df_shap = pd.DataFrame({'feature': feature_names, 'value': shap_vals})
 df_shap = df_shap.sort_values('value', ascending=True)
 colors = ['#d62728' if x < 0 else '#1f77b4' for x in df_shap['value']]
 ax.barh(df_shap['feature'], df_shap['value'], color=colors, height=0.6)
+
+# Force Text to BLACK
 ax.axvline(0, color='black', linewidth=0.8)
-ax.spines['top'].set_visible(False); ax.spines['right'].set_visible(False); ax.spines['left'].set_visible(False); ax.spines['bottom'].set_color('#888')
-ax.tick_params(axis='x', colors='#888'); ax.tick_params(axis='y', colors='#888')
-fig.patch.set_alpha(0); ax.patch.set_alpha(0)
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.spines['left'].set_visible(False)
+ax.spines['bottom'].set_color('black')
+ax.tick_params(axis='x', colors='black', labelsize=10)
+ax.tick_params(axis='y', colors='black', labelsize=12)
+
 st.pyplot(fig, use_container_width=True)
 
 # Assessment Logic
